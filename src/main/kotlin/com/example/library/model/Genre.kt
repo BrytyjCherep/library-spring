@@ -1,6 +1,6 @@
 package com.example.library.model
 
 data class Genre(
-    val id: Int = 0,
+    val id: Int? = null,
     val name: String
 )

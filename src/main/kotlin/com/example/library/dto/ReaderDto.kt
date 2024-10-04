@@ -1,7 +1,7 @@
 package com.example.library.dto
 
 data class ReaderDto(
-    val id: Int = 0,
+    val id: Int? = null,
     val name: String,
     val email: String
 )

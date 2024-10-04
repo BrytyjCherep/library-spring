@@ -84,6 +84,7 @@
                     type: integer
                     constraints:
                       nullable: false
+                      onDelete: cascade
                       foreignKeyName: bookId
                       references: book(id)
           - createTable:
@@ -128,6 +129,7 @@
                     type: integer
                     constraints:
                       nullable: false
+                      onDelete: cascade
                       foreignKeyName: genreId
                       references: genre(id)
           - createTable:
@@ -135,7 +137,7 @@
               tableName: composition_author
               columns:
                 - column:
-                    name: compositionAuthorId
+                    name: id
                     type: integer
                     autoIncrement: true
                     constraints:
@@ -146,6 +148,7 @@
                     type: integer
                     constraints:
                       nullable: false
+                      onDelete: cascade
                       foreignKeyName: compositionId
                       references: composition(id)
                 - column:
@@ -153,6 +156,7 @@
                     type: integer
                     constraints:
                       nullable: false
+                      onDelete: cascade
                       foreignKeyName: authorId
                       references: author(id)
           - createTable:
@@ -160,7 +164,7 @@
               tableName: book_composition
               columns:
                 - column:
-                    name: bookCompositionId
+                    name: id
                     type: integer
                     autoIncrement: true
                     constraints:
@@ -171,6 +175,7 @@
                     type: integer
                     constraints:
                       nullable: false
+                      onDelete: cascade
                       foreignKeyName: compositionId
                       references: composition(id)
                 - column:
@@ -178,6 +183,7 @@
                     type: integer
                     constraints:
                       nullable: false
+                      onDelete: cascade
                       foreignKeyName: bookId
                       references: book(id)
           - createTable:
@@ -196,6 +202,7 @@
                    type: integer
                    constraints:
                      nullable: false
+                     onDelete: cascade
                      foreignKeyName: readerId
                      references: reader(id)
                - column:
@@ -203,6 +210,7 @@
                    type: integer
                    constraints:
                      nullable: false
+                     onDelete: cascade
                      foreignKeyName: libraryBookId
                      references: library_book(id)
                - column:

@@ -140,6 +140,53 @@ class BookRepositoryImplTest {
                 Executable { assertEquals(bookList[i].publicationDate, bookGetList[i].publicationDate) },
             )
         }
+    }
 
+    @Test
+    fun update2() {
+        val book = Book(null, "Book2", "1111111", Date(700, 3, 14), listOf(composition1!!))
+        val bookId = bookRepository.create(book)
+        val updateBook = Book(null, "Update Book", "87654321", Date(600, 6, 8), listOf(composition1!!, composition2!!))
+
+        bookRepository.update(bookId, updateBook)
+        val updatedBook = bookRepository.findById(bookId)
+
+        assert(updatedBook?.compositions?.size == 2)
+    }
+
+    @Test
+    fun update3() {
+        val book = Book(null, "Book2", "1111111", Date(700, 3, 14), listOf())
+        val bookId = bookRepository.create(book)
+        val updateBook = Book(null, "Update Book", "87654321", Date(600, 6, 8), listOf(composition1!!, composition2!!))
+
+        bookRepository.update(bookId, updateBook)
+        val updatedBook = bookRepository.findById(bookId)
+
+        assert(updatedBook?.compositions?.size == 2)
+    }
+
+    @Test
+    fun update4() {
+        val book = Book(null, "Book2", "1111111", Date(700, 3, 14), listOf(composition1!!, composition2!!))
+        val bookId = bookRepository.create(book)
+        val updateBook = Book(null, "Update Book", "87654321", Date(600, 6, 8), listOf(composition2!!))
+
+        bookRepository.update(bookId, updateBook)
+        val updatedBook = bookRepository.findById(bookId)
+
+        assert(updatedBook?.compositions?.size == 1)
+    }
+
+    @Test
+    fun update5() {
+        val book = Book(null, "Book2", "1111111", Date(700, 3, 14), listOf(composition1!!, composition2!!))
+        val bookId = bookRepository.create(book)
+        val updateBook = Book(null, "Update Book", "87654321", Date(600, 6, 8), listOf())
+
+        bookRepository.update(bookId, updateBook)
+        val updatedBook = bookRepository.findById(bookId)
+
+        assert(updatedBook?.compositions?.size == 0)
     }
 }

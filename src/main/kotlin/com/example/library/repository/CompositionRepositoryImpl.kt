@@ -57,9 +57,15 @@ class CompositionRepositoryImpl(
                 "genre_id" to libraryObject.genre.id
             )
         )
+        jdbcTemplate.update(
+            "delete from composition_author where composition_id = :id",
+            mapOf(
+                "id" to id
+            )
+        )
         jdbcTemplate.batchUpdate(
-            "update composition_author set author_id = :author_id" +
-                    "where composition_id = :composition_id",
+            "insert into composition_author (composition_id, author_id)" +
+                    "values (:composition_id, :author_id)",
             libraryObject.authors.map { author ->
                 MapSqlParameterSource()
                     .addValue("composition_id", id, Types.INTEGER)
@@ -82,9 +88,9 @@ class CompositionRepositoryImpl(
             "SELECT composition.id, composition.name, composition.genre_id, genre.name as genre_name, " +
                     "author.id as author_id, author.name as author_name, author.nickname as author_nickname, author.birth_date as author_birth_date " +
                     "from composition " +
-                    "join genre on composition.genre_id = genre.id " +
-                    "join composition_author on composition.id = composition_author.composition_id " +
-                    "join author on composition_author.author_id = author.id " +
+                    "left join genre on composition.genre_id = genre.id " +
+                    "left join composition_author on composition.id = composition_author.composition_id " +
+                    "left join author on composition_author.author_id = author.id " +
                     "where composition.id = :id",
             mapOf(
                 "id" to id
@@ -121,14 +127,18 @@ class CompositionRepositoryImpl(
             )
             val authors: MutableList<Author> = mutableListOf()
             do {
-                authors.add(
-                    Author(
-                        rs.getInt("author_id"),
-                        rs.getString("author_name"),
-                        rs.getString("author_nickname"),
-                        rs.getDate("author_birth_date")
+                try {
+                    authors.add(
+                        Author(
+                            rs.getInt("author_id"),
+                            rs.getString("author_name"),
+                            rs.getString("author_nickname"),
+                            rs.getDate("author_birth_date")
+                        )
                     )
-                )
+                } catch (e: NullPointerException) {
+                    break
+                }
             } while (rs.next())
             Composition(
                 id,

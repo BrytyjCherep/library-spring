@@ -63,13 +63,19 @@ class BookRepositoryImpl(
                 "publication_date" to libraryObject.publicationDate
             )
         )
+        jdbcTemplate.update(
+            "delete from book_composition where book_id = :id",
+            mapOf(
+                "id" to id
+            )
+        )
         jdbcTemplate.batchUpdate(
-            "update book_composition set composition_id = :composition_id " +
-                    "where book_id = :id",
+            "insert into book_composition (composition_id, book_id) " +
+                    "values (:composition_id, :book_id)",
             libraryObject.compositions.map { composition ->
                 MapSqlParameterSource()
                     .addValue("composition_id", composition.id, Types.INTEGER)
-                    .addValue("id", id, Types.INTEGER)
+                    .addValue("book_id", id, Types.INTEGER)
             }.toTypedArray()
         )
     }
@@ -89,9 +95,9 @@ class BookRepositoryImpl(
                     "composition.id as composition_id, composition.name as composition_name, " +
                     "genre.id as genre_id, genre.name as genre_name " +
                     "from book " +
-                    "join book_composition on book.id = book_composition.book_id " +
-                    "join composition on book_composition.composition_id = composition.id " +
-                    "join genre on composition.genre_id = genre.id " +
+                    "left join book_composition on book.id = book_composition.book_id " +
+                    "left join composition on book_composition.composition_id = composition.id " +
+                    "left join genre on composition.genre_id = genre.id " +
                     "where book.id = :id",
             mapOf(
                 "id" to id
@@ -122,17 +128,21 @@ class BookRepositoryImpl(
             val publicationDate = rs.getDate("publication_date")
             val compositions: MutableList<Composition> = mutableListOf()
             do {
-                compositions.add(
-                    Composition(
-                        id = rs.getIntOrNull("composition_id"),
-                        name = rs.getString("composition_name"),
-                        Genre(
-                            id = rs.getInt("genre_id"),
-                            name = rs.getString("genre_name")
-                        ),
-                        emptyList()
+                try {
+                    compositions.add(
+                        Composition(
+                            id = rs.getIntOrNull("composition_id"),
+                            name = rs.getString("composition_name"),
+                            Genre(
+                                id = rs.getInt("genre_id"),
+                                name = rs.getString("genre_name")
+                            ),
+                            emptyList()
+                        )
                     )
-                )
+                } catch (e: NullPointerException) {
+                    break
+                }
             } while (rs.next())
             Book(
                 id = id,

@@ -49,7 +49,7 @@ class CompositionRepositoryImpl(
         jdbcTemplate.update(
             "update composition set " +
                     "name = :name, " +
-                    "genre_id = :genre_id, " +
+                    "genre_id = :genre_id " +
                     "where id = :id",
             mapOf(
                 "id" to id,

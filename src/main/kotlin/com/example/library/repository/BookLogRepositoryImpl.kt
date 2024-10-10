@@ -63,13 +63,13 @@ class BookLogRepositoryImpl(
 
     override fun findById(id: Int): BookLog? =
         jdbcTemplate.query(
-            "SELECT book_log.id, reader_id, library_book_id, issue_date, return_date," +
-                    "book.id as book_id, book.name as book_name, book.isbn as book_isbn," +
-                    "book.publication_date as book_publication_date, reader.name as reader_name, reader.email as reader_email" +
-                    "from book_log" +
-                    "join library_book on library_book_id = library_book.id" +
-                    "join book on library_book.book_id = book.id" +
-                    "join reader on reader_id = reader.id" +
+            "SELECT book_log.id, reader_id, library_book_id, issue_date, return_date, " +
+                    "book.id as book_id, book.name as book_name, book.isbn as book_isbn, " +
+                    "book.publication_date as book_publication_date, reader.name as reader_name, reader.email as reader_email " +
+                    "from book_log " +
+                    "join library_book on library_book_id = library_book.id " +
+                    "join book on library_book.book_id = book.id " +
+                    "join reader on reader_id = reader.id " +
                     "where book_log.id = :id",
             mapOf(
                 "id" to id
@@ -79,12 +79,12 @@ class BookLogRepositoryImpl(
 
     override fun getAll(): List<BookLog> =
         jdbcTemplate.query(
-            "SELECT book_log.id, reader_id, library_book_id, issue_date, return_date," +
-                    "book.id as book_id, book.name as book_name, book.isbn as book_isbn," +
-                    "book.publication_date as book_publication_date, reader.name as reader_name, reader.email as reader_email" +
-                    "from book_log" +
-                    "join library_book on library_book_id = library_book.id" +
-                    "join book on library_book.book_id = book.id" +
+            "SELECT book_log.id, reader_id, library_book_id, issue_date, return_date, " +
+                    "book.id as book_id, book.name as book_name, book.isbn as book_isbn, " +
+                    "book.publication_date as book_publication_date, reader.name as reader_name, reader.email as reader_email " +
+                    "from book_log " +
+                    "join library_book on library_book_id = library_book.id " +
+                    "join book on library_book.book_id = book.id " +
                     "join reader on reader_id = reader.id",
             ROW_MAPPER
         )

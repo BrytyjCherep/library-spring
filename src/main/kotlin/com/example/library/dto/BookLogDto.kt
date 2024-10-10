@@ -4,8 +4,8 @@ import java.sql.Date
 
 data class BookLogDto(
     val id: Int? = null,
-    val libraryBookDto: LibraryBookDto,
-    val readerDto: ReaderDto,
+    val libraryBook: LibraryBookDto,
+    val reader: ReaderDto,
     val issueDate: Date,
     val returnDate: Date? = null
 )

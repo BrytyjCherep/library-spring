@@ -4,11 +4,10 @@ import com.example.library.model.*
 import com.example.library.repository.*
 import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import java.util.*
+import java.sql.Date
 
 @SpringBootTest
 class SchedulerServiceTest {
@@ -46,7 +45,7 @@ class SchedulerServiceTest {
                     null,
                     "Пушкин Александр Сергеевич",
                     null,
-                    java.sql.Date(-101, 5, 26)
+                    Date(-101, 5, 26)
                 )
             )
         )
@@ -56,7 +55,7 @@ class SchedulerServiceTest {
                     null,
                     "Гоголь Николай Васильевич",
                     "gogol",
-                    java.sql.Date(-91, 0, 20)
+                    Date(-91, 0, 20)
                 )
             )
         )
@@ -91,7 +90,7 @@ class SchedulerServiceTest {
                     null,
                     "Сборник произведений Пушкина и Гоголя",
                     "12345678",
-                    java.sql.Date(121, 2, 14),
+                    Date(121, 2, 14),
                     listOf(composition1!!, composition2!!)
                 )
             )
@@ -116,7 +115,7 @@ class SchedulerServiceTest {
                 BookLog(
                     libraryBook = libraryBook!!,
                     reader = reader!!,
-                    issueDate = java.sql.Date(124, 8, 3)
+                    issueDate = Date(124, 8, 9)
                 )
             )
         )
@@ -124,6 +123,6 @@ class SchedulerServiceTest {
 
     @Test
     fun getListOfOverdueReaders() {
-        assert(mutableListOf(bookLog!!) == schedulerService.getListOfOverdueReaders())
+        assert(listOf(bookLog) == schedulerService.getListOfOverdueReaders())
     }
 }

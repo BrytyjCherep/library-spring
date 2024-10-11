@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.function.Executable
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import java.util.*
+import java.sql.Date
 
 @SpringBootTest
 class BookRepositoryImplTest {
@@ -37,8 +37,8 @@ class BookRepositoryImplTest {
 
     @BeforeEach
     fun setUp() {
-        auth1 = authorRepository.findById(authorRepository.create(Author(null, "Пушкин", null, java.sql.Date(800, 4, 10))))
-        auth2 = authorRepository.findById(authorRepository.create(Author(null, "Гоголь", "gogol", java.sql.Date(700, 3, 14))))
+        auth1 = authorRepository.findById(authorRepository.create(Author(null, "Пушкин", null, Date(800, 4, 10))))
+        auth2 = authorRepository.findById(authorRepository.create(Author(null, "Гоголь", "gogol", Date(700, 3, 14))))
         genre = genreRepository.findById(genreRepository.create(Genre(null, "Ужасы")))
         composition1 = compositionRepository.findById(
             compositionRepository.create(
@@ -71,7 +71,7 @@ class BookRepositoryImplTest {
 
     @Test
     fun create() {
-        val book = Book(null, "Create Book", "12345678", java.sql.Date(700, 3, 14), listOf(composition1!!, composition2!!))
+        val book = Book(null, "Create Book", "12345678", Date(700, 3, 14), listOf(composition1!!, composition2!!))
         val bookId = bookRepository.create(book)
         val testBook = bookRepository.findById(bookId)
 
@@ -86,9 +86,9 @@ class BookRepositoryImplTest {
 
     @Test
     fun update() {
-        val book = Book(null, "Book2", "1111111", java.sql.Date(700, 3, 14), listOf(composition1!!, composition2!!))
+        val book = Book(null, "Book2", "1111111", Date(700, 3, 14), listOf(composition1!!, composition2!!))
         val bookId = bookRepository.create(book)
-        val updateBook = Book(null, "Update Book", "87654321", java.sql.Date(600, 6, 8), listOf(composition1!!, composition2!!))
+        val updateBook = Book(null, "Update Book", "87654321", Date(600, 6, 8), listOf(composition1!!, composition2!!))
 
         bookRepository.update(bookId, updateBook)
         val updatedBook = bookRepository.findById(bookId)
@@ -103,7 +103,7 @@ class BookRepositoryImplTest {
 
     @Test
     fun deleteById() {
-        val book = Book(null, "Delete Book", "1111111", java.sql.Date(700, 3, 14), listOf(composition1!!, composition2!!))
+        val book = Book(null, "Delete Book", "1111111", Date(700, 3, 14), listOf(composition1!!, composition2!!))
         val bookId = bookRepository.create(book)
         bookRepository.deleteById(bookId)
         val deletedBook = bookRepository.findById(bookId)
@@ -112,7 +112,7 @@ class BookRepositoryImplTest {
 
     @Test
     fun findById() {
-        val book = Book(null, "FindById Book", "1111111", java.sql.Date(700, 3, 14), listOf(composition1!!, composition2!!))
+        val book = Book(null, "FindById Book", "1111111", Date(700, 3, 14), listOf(composition1!!, composition2!!))
         val bookId = bookRepository.create(book)
         val findedBook = bookRepository.findById(bookId)
         assertAll(
@@ -126,8 +126,8 @@ class BookRepositoryImplTest {
     @Test
     fun getAll() {
         bookRepository.deleteById(1)
-        val book = Book(null, "GetAll Book", "2221111", java.sql.Date(465, 1, 17), listOf(composition1!!, composition2!!))
-        val book2 = Book(null, "GetAll Book2", "4321234", java.sql.Date(597, 10, 20), listOf(composition1!!, composition2!!))
+        val book = Book(null, "GetAll Book", "2221111", Date(465, 1, 17), listOf(composition1!!, composition2!!))
+        val book2 = Book(null, "GetAll Book2", "4321234", Date(597, 10, 20), listOf(composition1!!, composition2!!))
         val bookList = mutableListOf(book, book2)
         bookRepository.create(book)
         bookRepository.create(book2)
@@ -144,9 +144,9 @@ class BookRepositoryImplTest {
 
     @Test
     fun update2() {
-        val book = Book(null, "Book2", "1111111", java.sql.Date(700, 3, 14), listOf(composition1!!))
+        val book = Book(null, "Book2", "1111111", Date(700, 3, 14), listOf(composition1!!))
         val bookId = bookRepository.create(book)
-        val updateBook = Book(null, "Update Book", "87654321", java.sql.Date(600, 6, 8), listOf(composition1!!, composition2!!))
+        val updateBook = Book(null, "Update Book", "87654321", Date(600, 6, 8), listOf(composition1!!, composition2!!))
 
         bookRepository.update(bookId, updateBook)
         val updatedBook = bookRepository.findById(bookId)
@@ -156,9 +156,9 @@ class BookRepositoryImplTest {
 
     @Test
     fun update3() {
-        val book = Book(null, "Book2", "1111111", java.sql.Date(700, 3, 14), listOf())
+        val book = Book(null, "Book2", "1111111", Date(700, 3, 14), listOf())
         val bookId = bookRepository.create(book)
-        val updateBook = Book(null, "Update Book", "87654321", java.sql.Date(600, 6, 8), listOf(composition1!!, composition2!!))
+        val updateBook = Book(null, "Update Book", "87654321", Date(600, 6, 8), listOf(composition1!!, composition2!!))
 
         bookRepository.update(bookId, updateBook)
         val updatedBook = bookRepository.findById(bookId)
@@ -168,9 +168,9 @@ class BookRepositoryImplTest {
 
     @Test
     fun update4() {
-        val book = Book(null, "Book2", "1111111", java.sql.Date(700, 3, 14), listOf(composition1!!, composition2!!))
+        val book = Book(null, "Book2", "1111111", Date(700, 3, 14), listOf(composition1!!, composition2!!))
         val bookId = bookRepository.create(book)
-        val updateBook = Book(null, "Update Book", "87654321", java.sql.Date(600, 6, 8), listOf(composition2!!))
+        val updateBook = Book(null, "Update Book", "87654321", Date(600, 6, 8), listOf(composition2!!))
 
         bookRepository.update(bookId, updateBook)
         val updatedBook = bookRepository.findById(bookId)
@@ -180,9 +180,9 @@ class BookRepositoryImplTest {
 
     @Test
     fun update5() {
-        val book = Book(null, "Book2", "1111111", java.sql.Date(700, 3, 14), listOf(composition1!!, composition2!!))
+        val book = Book(null, "Book2", "1111111", Date(700, 3, 14), listOf(composition1!!, composition2!!))
         val bookId = bookRepository.create(book)
-        val updateBook = Book(null, "Update Book", "87654321", java.sql.Date(600, 6, 8), listOf())
+        val updateBook = Book(null, "Update Book", "87654321", Date(600, 6, 8), listOf())
 
         bookRepository.update(bookId, updateBook)
         val updatedBook = bookRepository.findById(bookId)

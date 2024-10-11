@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.jdbc.support.GeneratedKeyHolder
 import org.springframework.stereotype.Repository
+import java.time.LocalDate
 
 @Repository
 class BookLogRepositoryImpl(
@@ -86,6 +87,22 @@ class BookLogRepositoryImpl(
                     "join library_book on library_book_id = library_book.id " +
                     "join book on library_book.book_id = book.id " +
                     "join reader on reader_id = reader.id",
+            ROW_MAPPER
+        )
+
+    override fun getListOfOverdueReaders(currentDate: LocalDate): List<BookLog> =
+        jdbcTemplate.query(
+            "SELECT book_log.id, reader_id, library_book_id, issue_date, return_date, " +
+                    "book.id as book_id, book.name as book_name, book.isbn as book_isbn, " +
+                    "book.publication_date as book_publication_date, reader.name as reader_name, reader.email as reader_email " +
+                    "from book_log " +
+                    "join library_book on library_book_id = library_book.id " +
+                    "join book on library_book.book_id = book.id " +
+                    "join reader on reader_id = reader.id " +
+                    "where return_date IS NULL AND issue_date < :current_date",
+            mapOf(
+                "current_date" to currentDate
+            ),
             ROW_MAPPER
         )
 

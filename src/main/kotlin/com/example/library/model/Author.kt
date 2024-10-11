@@ -1,6 +1,6 @@
 package com.example.library.model
 
-import java.util.*
+import java.sql.Date
 
 data class Author(
     val id: Int? = null,

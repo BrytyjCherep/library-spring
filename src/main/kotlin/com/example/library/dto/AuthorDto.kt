@@ -1,6 +1,6 @@
 package com.example.library.dto
 
-import java.util.Date
+import java.sql.Date
 
 data class AuthorDto(
     val id: Int? = null,

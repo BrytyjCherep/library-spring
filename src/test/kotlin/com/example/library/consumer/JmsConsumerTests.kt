@@ -14,14 +14,7 @@ class JmsConsumerTests {
         val isbn = "0123456789"
         val readerId = 11
         val message =
-            """<readerBooks>
-                    <book>
-                        <isbn>${isbn}</isbn>
-                    </book>
-                    <reader>
-                        <id>${readerId}</id>
-                    </reader>
-                    </readerBooks>"""
+            "<readerBooks><book><isbn>${isbn}</isbn></book><reader><id>${readerId}</id></reader></readerBooks>"
         assert(Pair(isbn, readerId) == jmsConsumer.parseXML(message))
     }
 
@@ -30,14 +23,7 @@ class JmsConsumerTests {
         val isbn = ""
         val readerId = 11
         val message =
-            """<readerBooks>
-                    <book>
-                        <isbn>${isbn}</isbn>
-                    </book>
-                    <reader>
-                        <id>${readerId}</id>
-                    </reader> 
-                    </readerBooks>"""
+            "<readerBooks><book><isbn>${isbn}</isbn></book><reader><id>${readerId}</id></reader></readerBooks>"
         assert(jmsConsumer.parseXML(message) == null)
     }
 
@@ -46,14 +32,7 @@ class JmsConsumerTests {
         val isbn = "0123456789"
         val readerId = null
         val message =
-            """<readerBooks>
-                    <book>
-                        <isbn>${isbn}</isbn>
-                    </book>
-                    <reader>
-                        <id>${readerId}</id>
-                    </reader> 
-                    </readerBooks>"""
+            "<readerBooks><book><isbn>${isbn}</isbn></book><reader><id>${readerId}</id></reader></readerBooks>"
         assert(jmsConsumer.parseXML(message) == null)
     }
 

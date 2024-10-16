@@ -4,6 +4,7 @@ import com.example.library.dto.AuthorDto
 import com.example.library.service.AuthorService
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin(origins = arrayOf("http://localhost:3000"), maxAge = 3600)
 @RestController
 @RequestMapping("/author")
 class AuthorController(private val authorService: AuthorService) {

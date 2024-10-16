@@ -273,3 +273,68 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: library_book
             referencedTableSchemaName: public
+  - changeSet:
+      id: 3
+      author: s.linev
+      changes:
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: Чехов Антон Павлович
+              - column:
+                  name: nickname
+                  value: Chehov
+              - column:
+                  name: birth_date
+                  value: '1860-01-29'
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: Пушкин Александр Владимирович
+              - column:
+                  name: nickname
+                  value: null
+              - column:
+                  name: birth_date
+                  value: '1799-05-26'
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: Стэкпол Майкл Остин
+              - column:
+                  name: nickname
+                  value: Stackpole
+              - column:
+                  name: birth_date
+                  value: '1957-11-27'
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: Теренс Джон Пратчетт
+              - column:
+                  name: nickname
+                  value: TerryPratchett
+              - column:
+                  name: birth_date
+                  value: '1948-03-12'
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: Абрахам Брэм Стокер
+              - column:
+                  name: nickname
+                  value: Dracula
+              - column:
+                  name: birth_date
+                  value: '1847-11-08'
+

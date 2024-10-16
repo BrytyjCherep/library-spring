@@ -41,7 +41,7 @@ class BookLogRepositoryImpl(
                     "reader_id = :reader_id, " +
                     "library_book_id = :library_book_id, " +
                     "issue_date = :issue_date, " +
-                    "return_date = :return_date" +
+                    "return_date = :return_date " +
                     "where id = :id",
             mapOf(
                 "id" to id,
@@ -105,6 +105,36 @@ class BookLogRepositoryImpl(
             ),
             ROW_MAPPER
         )
+
+    override fun getListForReturnBook(isbn: String, readerId: Int): List<BookLog> =
+        jdbcTemplate.query(
+            "SELECT book_log.id, reader_id, library_book_id, issue_date, return_date, " +
+                    "book.id as book_id, book.name as book_name, book.isbn as book_isbn, " +
+                    "book.publication_date as book_publication_date, reader.name as reader_name, reader.email as reader_email " +
+                    "from book_log " +
+                    "join library_book on library_book_id = library_book.id " +
+                    "join book on library_book.book_id = book.id " +
+                    "join reader on reader_id = reader.id " +
+                    "where book.isbn = :isbn AND reader.id = :reader_id AND return_date IS NULL " +
+                    "order by issue_date desc",
+            mapOf(
+                "isbn" to isbn,
+                "reader_id" to readerId
+            ),
+            ROW_MAPPER
+        )
+
+    override fun updateReturnDate(bookLogId: Int, returnDate: LocalDate) {
+        jdbcTemplate.update(
+            "update book_log set " +
+                    "return_date = :return_date " +
+                    "where id = :id",
+            mapOf(
+                "return_date" to returnDate,
+                "id" to bookLogId
+            )
+        )
+    }
 
     private companion object {
         val ROW_MAPPER = RowMapper<BookLog> { rs, _ ->

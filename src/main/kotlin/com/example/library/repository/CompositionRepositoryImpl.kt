@@ -102,7 +102,8 @@ class CompositionRepositoryImpl(
         jdbcTemplate.query(
             "SELECT composition.id, composition.name, composition.genre_id, genre.name as genre_name " +
                     "from composition " +
-                    "join genre on composition.genre_id = genre.id",
+                    "join genre on composition.genre_id = genre.id " +
+                    "order by composition.id",
             ROW_MAPPER
         )
 

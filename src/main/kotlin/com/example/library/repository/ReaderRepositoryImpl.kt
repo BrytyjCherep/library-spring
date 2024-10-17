@@ -59,7 +59,7 @@ class ReaderRepositoryImpl (
 
     override fun getAll(): List<Reader> =
         jdbcTemplate.query(
-            "select * from reader",
+            "select * from reader order by id",
             ROW_MAPPER
         )
 

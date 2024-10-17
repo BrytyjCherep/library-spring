@@ -107,7 +107,7 @@ class BookRepositoryImpl(
 
     override fun getAll(): List<Book> =
         jdbcTemplate.query(
-            "select * from book",
+            "select * from book order by id",
             ROW_MAPPER
         )
 

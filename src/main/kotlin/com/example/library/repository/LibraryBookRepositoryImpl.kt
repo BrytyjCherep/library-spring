@@ -64,7 +64,8 @@ class LibraryBookRepositoryImpl(
         jdbcTemplate.query(
             "select library_book.id, book.id as book_id, book.name, book.isbn, book.publication_date " +
                     "from library_book " +
-                    "JOIN book ON library_book.book_id = book.id",
+                    "JOIN book ON library_book.book_id = book.id " +
+                    "order by library_book.id",
             ROW_MAPPER
         )
 

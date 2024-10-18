@@ -62,7 +62,7 @@ class AuthorRepositoryImpl(
 
     override fun getAll(): List<Author> =
         jdbcTemplate.query(
-            "select * from author",
+            "select * from author order by id",
             ROW_MAPPER
         )
 

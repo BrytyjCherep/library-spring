@@ -58,7 +58,7 @@ class GenreRepositoryImpl(
 
     override fun getAll(): List<Genre> =
         jdbcTemplate.query(
-            "select * from genre",
+            "select * from genre order by id",
             ROW_MAPPER
         )
 

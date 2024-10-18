@@ -86,7 +86,8 @@ class BookLogRepositoryImpl(
                     "from book_log " +
                     "join library_book on library_book_id = library_book.id " +
                     "join book on library_book.book_id = book.id " +
-                    "join reader on reader_id = reader.id",
+                    "join reader on reader_id = reader.id " +
+                    "order by book_log.id",
             ROW_MAPPER
         )
 

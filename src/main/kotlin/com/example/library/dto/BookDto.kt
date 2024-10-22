@@ -7,5 +7,5 @@ data class BookDto(
     val name: String,
     val isbn: String,
     val publicationDate: Date,
-    val compositions: List<CompositionDto>
+    val compositions: List<CompositionDto>? = null
 )

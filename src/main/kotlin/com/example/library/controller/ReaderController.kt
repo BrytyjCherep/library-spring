@@ -4,6 +4,7 @@ import com.example.library.dto.ReaderDto
 import com.example.library.service.ReaderService
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin(origins = arrayOf("http://localhost:3000"), maxAge = 3600)
 @RestController
 @RequestMapping("/reader")
 class ReaderController(private val readerService: ReaderService) {

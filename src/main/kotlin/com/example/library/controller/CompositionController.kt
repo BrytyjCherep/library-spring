@@ -4,6 +4,7 @@ import com.example.library.dto.CompositionDto
 import com.example.library.service.CompositionService
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin(origins = arrayOf("http://localhost:3000"), maxAge = 3600)
 @RestController
 @RequestMapping("/composition")
 class CompositionController(private val compositionService: CompositionService) {

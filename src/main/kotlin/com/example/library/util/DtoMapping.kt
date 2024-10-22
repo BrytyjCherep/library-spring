@@ -38,7 +38,7 @@ fun Book.toDto() = BookDto (
     name = name,
     isbn = isbn,
     publicationDate = publicationDate,
-    compositions = compositions.map { it.toDto() }
+    compositions = compositions?.map { it.toDto() }
 )
 
 fun BookDto.toModel() = Book (
@@ -46,21 +46,21 @@ fun BookDto.toModel() = Book (
     name = name,
     isbn = isbn,
     publicationDate = publicationDate,
-    compositions = compositions.map { it.toModel() }
+    compositions = compositions?.map { it.toModel() }
 )
 
 fun Composition.toDto() = CompositionDto (
     id = id,
     name = name,
     genre = genre.toDto(),
-    authors = authors.map { it.toDto() }
+    authors = authors?.map { it.toDto() }
 )
 
 fun CompositionDto.toModel() = Composition (
     id = id,
     name = name,
     genre = genre.toModel(),
-    authors = authors.map { it.toModel() }
+    authors = authors?.map { it.toModel() }
 )
 
 fun Genre.toDto() = GenreDto(

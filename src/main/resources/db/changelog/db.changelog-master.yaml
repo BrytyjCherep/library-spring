@@ -337,4 +337,240 @@ databaseChangeLog:
               - column:
                   name: birth_date
                   value: '1847-11-08'
-
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: Ужасы
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: Детектив
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: Фантастика
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: Фэнтези
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: Драма
+        - insert:
+            tableName: reader
+            columns:
+              - column:
+                  name: name
+                  value: Святослав Линев Игоревич
+              - column:
+                  name: email
+                  value: s.linev@bft.ru
+        - insert:
+            tableName: reader
+            columns:
+              - column:
+                  name: name
+                  value: Иванов Иван Иванович
+              - column:
+                  name: email
+                  value: ivan@yandex.ru
+        - insert:
+            tableName: reader
+            columns:
+              - column:
+                  name: name
+                  value: Долговязов Андрей Николаевич
+              - column:
+                  name: email
+                  value: dolgo@gmail.com
+        - insert:
+            tableName: reader
+            columns:
+              - column:
+                  name: name
+                  value: Чеплакова Юлия Валерьевна
+              - column:
+                  name: email
+                  value: cheplakova@yandex.ru
+        - insert:
+            tableName: composition
+            columns:
+              - column:
+                  name: name
+                  value: Произведение Пушкина и Чехова
+              - column:
+                  name: genre_id
+                  value: 5
+        - insert:
+            tableName: composition
+            columns:
+              - column:
+                  name: name
+                  value: Дракула
+              - column:
+                  name: genre_id
+                  value: 1
+        - insert:
+            tableName: composition
+            columns:
+              - column:
+                  name: name
+                  value: Стража! Стража!
+              - column:
+                  name: genre_id
+                  value: 4
+        - insert:
+            tableName: composition
+            columns:
+              - column:
+                  name: name
+                  value: Оружие к бою!
+              - column:
+                  name: genre_id
+                  value: 3
+        - insert:
+            tableName: composition_author
+            columns:
+              - column:
+                  name: composition_id
+                  value: 1
+              - column:
+                  name: author_id
+                  value: 1
+        - insert:
+            tableName: composition_author
+            columns:
+              - column:
+                  name: composition_id
+                  value: 1
+              - column:
+                  name: author_id
+                  value: 2
+        - insert:
+            tableName: composition_author
+            columns:
+              - column:
+                  name: composition_id
+                  value: 2
+              - column:
+                  name: author_id
+                  value: 5
+        - insert:
+            tableName: composition_author
+            columns:
+              - column:
+                  name: composition_id
+                  value: 3
+              - column:
+                  name: author_id
+                  value: 4
+        - insert:
+            tableName: composition_author
+            columns:
+              - column:
+                  name: composition_id
+                  value: 4
+              - column:
+                  name: author_id
+                  value: 3
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: Сборник произведений Пушкина и Чехова
+              - column:
+                  name: isbn
+                  value: 0-1576-8825-9
+              - column:
+                  name: publication_date
+                  value: '2005-10-07'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: Фэнтези рассказы про вампиров и Плоский мир
+              - column:
+                  name: isbn
+                  value: 0-3509-0572-X
+              - column:
+                  name: publication_date
+                  value: '2010-03-15'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: Рассказы по вселенной Battletech
+              - column:
+                  name: isbn
+                  value: 0-2117-5412-9
+              - column:
+                  name: publication_date
+                  value: '2021-01-29'
+        - insert:
+            tableName: book_composition
+            columns:
+              - column:
+                  name: composition_id
+                  value: 1
+              - column:
+                  name: book_id
+                  value: 1
+        - insert:
+            tableName: book_composition
+            columns:
+              - column:
+                  name: composition_id
+                  value: 2
+              - column:
+                  name: book_id
+                  value: 2
+        - insert:
+            tableName: book_composition
+            columns:
+              - column:
+                  name: composition_id
+                  value: 3
+              - column:
+                  name: book_id
+                  value: 2
+        - insert:
+            tableName: book_composition
+            columns:
+              - column:
+                  name: composition_id
+                  value: 4
+              - column:
+                  name: book_id
+                  value: 3
+        - insert:
+            tableName: library_book
+            columns:
+              - column:
+                  name: book_id
+                  value: 1
+        - insert:
+            tableName: library_book
+            columns:
+              - column:
+                  name: book_id
+                  value: 2
+        - insert:
+            tableName: library_book
+            columns:
+              - column:
+                  name: book_id
+                  value: 3

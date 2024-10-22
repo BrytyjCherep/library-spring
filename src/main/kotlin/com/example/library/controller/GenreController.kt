@@ -4,6 +4,7 @@ import com.example.library.dto.GenreDto
 import com.example.library.service.GenreService
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin(origins = arrayOf("http://localhost:3000"), maxAge = 3600)
 @RestController
 @RequestMapping("/genre")
 class GenreController(private val  genreService: GenreService) {

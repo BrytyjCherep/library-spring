@@ -8,5 +8,5 @@ data class Book(
     val name: String,
     val isbn: String,
     val publicationDate: Date,
-    val compositions: List<Composition>
+    val compositions: List<Composition>? = null
 )

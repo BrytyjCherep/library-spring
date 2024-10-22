@@ -32,6 +32,7 @@ class CompositionRepositoryImpl(
         )
 
         val id = keyHolder.keys?.getValue("id") as Int
+        if (libraryObject.authors == null) return id
         jdbcTemplate.batchUpdate(
             "insert into composition_author (composition_id, author_id)" +
                     "values (:composition_id, :author_id)",
@@ -63,6 +64,7 @@ class CompositionRepositoryImpl(
                 "id" to id
             )
         )
+        if (libraryObject.authors == null) return
         jdbcTemplate.batchUpdate(
             "insert into composition_author (composition_id, author_id)" +
                     "values (:composition_id, :author_id)",

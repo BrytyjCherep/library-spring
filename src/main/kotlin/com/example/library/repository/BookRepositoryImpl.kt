@@ -35,6 +35,7 @@ class BookRepositoryImpl(
         )
 
         val id = keyHolder.keys?.getValue("id") as Int
+        if (libraryObject.compositions == null) return id
         jdbcTemplate.batchUpdate(
             "insert into book_composition (composition_id, book_id) " +
                     "values (:composition_id, :book_id)",
@@ -69,6 +70,7 @@ class BookRepositoryImpl(
                 "id" to id
             )
         )
+        if (libraryObject.compositions == null) return
         jdbcTemplate.batchUpdate(
             "insert into book_composition (composition_id, book_id) " +
                     "values (:composition_id, :book_id)",

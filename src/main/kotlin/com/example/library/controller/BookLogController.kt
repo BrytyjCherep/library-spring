@@ -4,6 +4,7 @@ import com.example.library.dto.BookLogDto
 import com.example.library.service.BookLogService
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin(origins = arrayOf("http://localhost:3000"), maxAge = 3600)
 @RestController
 @RequestMapping("/bookLog")
 class BookLogController(private val bookLogService: BookLogService) {

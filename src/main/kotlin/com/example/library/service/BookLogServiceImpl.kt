@@ -13,6 +13,10 @@ class BookLogServiceImpl(private val bookLogRepository: BookLogRepository) : Boo
         bookLogRepository.updateReturnDate(id, returnDate)
     }
 
+    override fun makeReport(libraryBookId: Int, readerId: Int): List<BookLogDto> =
+        bookLogRepository.makeReport(libraryBookId, readerId).map { it.toDto() }
+
+
     override fun create(dto: BookLogDto): Int =
         bookLogRepository.create(dto.toModel())
 

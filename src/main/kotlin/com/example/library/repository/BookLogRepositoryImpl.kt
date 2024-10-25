@@ -125,6 +125,41 @@ class BookLogRepositoryImpl(
             ROW_MAPPER
         )
 
+    override fun makeReport(libraryBookId: Int, readerId: Int): List<BookLog> =
+        if (libraryBookId != -1 && readerId != -1) {
+            jdbcTemplate.query(
+                "SELECT book_log.id, reader_id, library_book_id, issue_date, return_date, " +
+                        "book.id as book_id, book.name as book_name, book.isbn as book_isbn, " +
+                        "book.publication_date as book_publication_date, reader.name as reader_name, reader.email as reader_email " +
+                        "from book_log " +
+                        "join library_book on library_book_id = library_book.id " +
+                        "join book on library_book.book_id = book.id " +
+                        "join reader on reader_id = reader.id " +
+                        "where library_book_id = :library_book_id AND reader_id = :reader_id",
+                mapOf(
+                    "library_book_id" to libraryBookId,
+                    "reader_id" to readerId
+                ),
+                ROW_MAPPER
+            )
+        } else {
+            jdbcTemplate.query(
+                "SELECT book_log.id, reader_id, library_book_id, issue_date, return_date, " +
+                        "book.id as book_id, book.name as book_name, book.isbn as book_isbn, " +
+                        "book.publication_date as book_publication_date, reader.name as reader_name, reader.email as reader_email " +
+                        "from book_log " +
+                        "join library_book on library_book_id = library_book.id " +
+                        "join book on library_book.book_id = book.id " +
+                        "join reader on reader_id = reader.id " +
+                        "where library_book_id = :library_book_id OR reader_id = :reader_id",
+                mapOf(
+                    "library_book_id" to libraryBookId,
+                    "reader_id" to readerId
+                ),
+                ROW_MAPPER
+            )
+        }
+
     override fun updateReturnDate(bookLogId: Int, returnDate: LocalDate) {
         jdbcTemplate.update(
             "update book_log set " +

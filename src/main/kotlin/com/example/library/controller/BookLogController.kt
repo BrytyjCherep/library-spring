@@ -10,10 +10,10 @@ import java.time.LocalDate
 @RequestMapping("/bookLog")
 class BookLogController(private val bookLogService: BookLogService) {
     @GetMapping
-    fun getAll() : List<BookLogDto> = bookLogService.getAll()
+    fun getAll(): List<BookLogDto> = bookLogService.getAll()
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Int) : BookLogDto? = bookLogService.findById(id)
+    fun findById(@PathVariable id: Int): BookLogDto? = bookLogService.findById(id)
 
     @PostMapping
     fun create(@RequestBody bookLogDto: BookLogDto) {
@@ -34,4 +34,9 @@ class BookLogController(private val bookLogService: BookLogService) {
     fun returnBook(@PathVariable id: Int) {
         bookLogService.returnBook(id, LocalDate.now())
     }
+
+    @GetMapping("/report/{libraryBookId}/{readerId}")
+    fun makeReport(@PathVariable  libraryBookId: Int, @PathVariable readerId: Int) : List<BookLogDto> =
+        bookLogService.makeReport(libraryBookId, readerId)
+
 }

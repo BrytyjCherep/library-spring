@@ -5,4 +5,6 @@ import java.time.LocalDate
 
 interface BookLogService : LibraryService<BookLogDto> {
     fun returnBook(id:Int, returnDate: LocalDate)
+
+    fun makeReport(libraryBookId: Int, readerId: Int) : List<BookLogDto>
 }
